@@ -496,104 +496,32 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
-  collectionName: 'articles';
+export interface ApiExerciseExercise extends Struct.CollectionTypeSchema {
+  collectionName: 'exercises';
   info: {
-    description: 'Create your blog content';
-    displayName: 'Article';
-    pluralName: 'articles';
-    singularName: 'article';
+    displayName: 'exercises';
+    pluralName: 'exercises';
+    singularName: 'exercise';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    author: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
-    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
-    cover: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
-      }>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::article.article'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'>;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
-  collectionName: 'authors';
-  info: {
-    description: 'Create authors for your content';
-    displayName: 'Author';
-    pluralName: 'authors';
-    singularName: 'author';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::author.author'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
-  info: {
-    description: 'Organize your content into categories';
-    displayName: 'Category';
-    pluralName: 'categories';
-    singularName: 'category';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    cardDescription: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    idExercise: Schema.Attribute.UID;
+    idTopic: Schema.Attribute.Relation<'manyToOne', 'api::topic.topic'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::category.category'
+      'api::exercise.exercise'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -626,6 +554,104 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     siteDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     siteName: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiThemeTheme extends Struct.CollectionTypeSchema {
+  collectionName: 'themes';
+  info: {
+    displayName: 'themes';
+    pluralName: 'themes';
+    singularName: 'theme';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    alt: Schema.Attribute.String;
+    cardDescription: Schema.Attribute.Text;
+    category: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    idTheme: Schema.Attribute.UID;
+    idTopic: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
+    imageTheme: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::theme.theme'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sequence: Schema.Attribute.Integer;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
+  collectionName: 'topics';
+  info: {
+    displayName: 'topics';
+    pluralName: 'topics';
+    singularName: 'topic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cardDescription: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    idExercises: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::exercise.exercise'
+    >;
+    idTheme: Schema.Attribute.Relation<'manyToOne', 'api::theme.theme'>;
+    idTopics: Schema.Attribute.UID;
+    idVideos: Schema.Attribute.Relation<'oneToMany', 'api::video.video'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVideoVideo extends Struct.CollectionTypeSchema {
+  collectionName: 'videos';
+  info: {
+    displayName: 'videos';
+    pluralName: 'videos';
+    singularName: 'video';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descripition: Schema.Attribute.Text;
+    idTopics: Schema.Attribute.Relation<'manyToOne', 'api::topic.topic'>;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::video.video'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    references: Schema.Attribute.String;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1144,10 +1170,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
-      'api::article.article': ApiArticleArticle;
-      'api::author.author': ApiAuthorAuthor;
-      'api::category.category': ApiCategoryCategory;
+      'api::exercise.exercise': ApiExerciseExercise;
       'api::global.global': ApiGlobalGlobal;
+      'api::theme.theme': ApiThemeTheme;
+      'api::topic.topic': ApiTopicTopic;
+      'api::video.video': ApiVideoVideo;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

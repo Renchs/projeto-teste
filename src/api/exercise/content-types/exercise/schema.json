@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "exercises",
+  "info": {
+    "singularName": "exercise",
+    "pluralName": "exercises",
+    "displayName": "exercises"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "idExercise": {
+      "type": "uid"
+    },
+    "idTopic": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::topic.topic",
+      "inversedBy": "idExercises"
+    },
+    "title": {
+      "type": "string"
+    },
+    "cardDescription": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

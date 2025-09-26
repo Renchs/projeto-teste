@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "themes",
+  "info": {
+    "singularName": "theme",
+    "pluralName": "themes",
+    "displayName": "themes"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "idTheme": {
+      "type": "uid"
+    },
+    "title": {
+      "type": "string"
+    },
+    "cardDescription": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "imageTheme": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "category": {
+      "type": "string"
+    },
+    "sequence": {
+      "type": "integer"
+    },
+    "alt": {
+      "type": "string"
+    },
+    "idTopic": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::topic.topic",
+      "mappedBy": "idTheme"
+    }
+  }
+}
