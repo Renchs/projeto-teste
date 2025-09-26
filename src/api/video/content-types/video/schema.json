@@ -21,7 +21,7 @@
       "type": "string"
     },
     "descripition": {
-      "type": "text"
+      "type": "richtext"
     },
     "references": {
       "type": "string"

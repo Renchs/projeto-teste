@@ -511,7 +511,7 @@ export interface ApiExerciseExercise extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.RichText;
     idExercise: Schema.Attribute.UID;
     idTopic: Schema.Attribute.Relation<'manyToOne', 'api::topic.topic'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -610,7 +610,7 @@ export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.RichText;
     idExercises: Schema.Attribute.Relation<
       'oneToMany',
       'api::exercise.exercise'
@@ -643,7 +643,7 @@ export interface ApiVideoVideo extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    descripition: Schema.Attribute.Text;
+    descripition: Schema.Attribute.RichText;
     idTopics: Schema.Attribute.Relation<'manyToOne', 'api::topic.topic'>;
     link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
